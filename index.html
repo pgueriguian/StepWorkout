@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v6</title>
+    <title>Footstep Simulator v7</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -130,7 +130,7 @@
                     switchedSquares[activeSquare].classList.add('active');
                 }
 
-                if (currentStep % switchSteps === 1) {
+                if (currentStep % switchSteps === switchSteps-1) {
                     //warning about to switch leg
                     const warning = document.getElementById('warning');
                     warning.style.display = 'block'; // Show the div
