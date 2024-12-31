@@ -81,7 +81,13 @@
                 document.getElementById('square3'),
                 document.getElementById('square4')
             ];
-
+            const switchedSquares = [
+                document.getElementById('square2'),
+                document.getElementById('square1'),
+                document.getElementById('square4'),
+                document.getElementById('square3')
+            ];
+            
             let currentStep = 0;
             let leadingLeg = 1; // 1 for left, 2 for right
 
@@ -91,7 +97,12 @@
                 });
                 
                 const activeSquare = currentStep % 4;
-                squares[activeSquare].classList.add('active');
+                if (leadingLeg === 1){
+                    squares[activeSquare].classList.add('active');
+                }
+                else{
+                    switchedSquares[activeSquare].classList.add('active');
+                }
 
                 if (currentStep % switchSteps === 0) {
                     leadingLeg = leadingLeg === 1 ? 2 : 1;
