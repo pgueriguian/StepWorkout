@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v7</title>
+    <title>Footstep Simulator v8</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -83,7 +83,8 @@
 
     <script>
         let intervalId;
-        document.getElementById('warning').style.display = 'none'; // Initially hide the div
+        document.getElementById('warning').style.visibility = 'hidden'; // Initially hide the div
+
         function startSimulation() {
             clearInterval(intervalId);
 
@@ -133,10 +134,10 @@
                 if (currentStep % switchSteps === switchSteps-1) {
                     //warning about to switch leg
                     const warning = document.getElementById('warning');
-                    warning.style.display = 'block'; // Show the div
+                    warning.style.visibility = 'visible'; // Make the div visible
                     setTimeout(() => {
-                        warning.style.display = 'none'; // Hide the div after 1 second
-                    }, 2000); // 2000 ms = 1 second
+                        warning.style.visibility = 'hidden'; // Hide the div after 2 second
+                    }, 2000); // 2000 ms = 2 second
                 }
                 if (currentStep % switchSteps === 0 && currentStep !== 0) {
                     leadingLeg = leadingLeg === 1 ? 2 : 1;
