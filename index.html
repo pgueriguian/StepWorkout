@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footstep Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 100px);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .square {
+            width: 100px;
+            height: 100px;
+            background-color: lightgray;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .active {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Footstep Simulator</h1>
+    <form id="control-form">
+        <label>
+            Length (minutes):
+            <input type="number" id="length" step="0.1" min="0.1" required>
+        </label>
+        <br><br>
+        <label>
+            BPM:
+            <input type="number" id="bpm" min="1" required>
+        </label>
+        <br><br>
+        <label>
+            Switch Interval (minutes):
+            <input type="number" id="switch-interval" step="0.1" min="0.1" required>
+        </label>
+        <br><br>
+        <button type="button" onclick="startSimulation()">Start</button>
+    </form>
+
+    <div class="grid">
+        <div id="square1" class="square">1</div>
+        <div id="square2" class="square">2</div>
+        <div id="square3" class="square">3</div>
+        <div id="square4" class="square">4</div>
+    </div>
+
+    <script>
+        let intervalId;
+
+        function startSimulation() {
+            clearInterval(intervalId);
+
+            const length = parseFloat(document.getElementById('length').value) * 60; // Convert minutes to seconds
+            const bpm = parseFloat(document.getElementById('bpm').value);
+            const switchInterval = parseFloat(document.getElementById('switch-interval').value) * 60; // Convert minutes to seconds
+
+            const stepDuration = (60 / bpm) * 4; // Time for a full cycle (4 steps)
+            const totalSteps = Math.floor(length / stepDuration * 4); // Total steps in the duration
+            const switchSteps = Math.floor(switchInterval / stepDuration * 4); // Steps before switching leading leg
+
+            const squares = [
+                document.getElementById('square1'),
+                document.getElementById('square2'),
+                document.getElementById('square3'),
+                document.getElementById('square4')
+            ];
+
+            let currentStep = 0;
+            let leadingLeg = 1; // 1 for left, 2 for right
+
+            function updateSquares() {
+                squares.forEach((square, index) => {
+                    square.classList.remove('active');
+                });
+                
+                const activeSquare = currentStep % 4;
+                squares[activeSquare].classList.add('active');
+
+                if (currentStep % switchSteps === 0) {
+                    leadingLeg = leadingLeg === 1 ? 2 : 1;
+                }
+
+                currentStep++;
+                if (currentStep >= totalSteps) {
+                    clearInterval(intervalId);
+                }
+            }
+
+            intervalId = setInterval(updateSquares, stepDuration * 1000 / 4);
+            updateSquares(); // Run once immediately
+        }
+    </script>
+</body>
+</html>
