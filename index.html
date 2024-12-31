@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v15</title>
+    <title>Footstep Simulator v16</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,22 +86,15 @@
         let intervalId;
         document.getElementById('warning').style.visibility = 'hidden'; // Initially hide the div
 
-        function startSimulation() {
+        async function startSimulation() {
             clearInterval(intervalId);
             const countdown = document.getElementById('countdown');
-          // Use setTimeout to give the browser a chance to render the update before blocking
-          for (let i = 5; i >= 1; i--) {
-            countdown.textContent = i;
+              for (let i = 5; i >= 1; i--) {
+                countdown.textContent = i;
             
-            // Yield to allow the browser to render the updated text
-            setTimeout(function() {
-              // Block for 1 second
-              let start = Date.now();
-              while (Date.now() - start < 1000) {
-                // This loop will block the thread for 1 second
+                // Wait for 1 second (non-blocking)
+                await new Promise(resolve => setTimeout(resolve, 1000));
               }
-            }, 0); // setTimeout with a delay of 0ms gives the browser a chance to render
-          }
             countdown.textContent = 0;
             
             const length = parseFloat(document.getElementById('length').value) * 60; // Convert minutes to seconds
