@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v17</title>
+    <title>Footstep Simulator v18</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,7 +58,7 @@
     <form id="control-form">
         <label>
             Length (minutes):
-            <input type="number" id="length" step="0.1" min="0.1" required>
+            <input type="number" id="length" step="0.1" min="0.1" value="12" required>
         </label>
         <br><br>
         <label>
@@ -68,7 +68,7 @@
         <br><br>
         <label>
             Switch Interval (minutes):
-            <input type="number" id="switch-interval" step="0.1" min="0.1" required>
+            <input type="number" id="switch-interval" step="0.1" min="0.1" value="2" required>
         </label>
         <br><br>
         <button type="button" onclick="startSimulation()">Start</button>
