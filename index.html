@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v8</title>
+    <title>Footstep Simulator v9</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -95,7 +95,9 @@
 
             const stepDuration = (60 / bpm) * 4; // Time for a full cycle (4 steps)
             const totalSteps = Math.floor(length / stepDuration * 4); // Total steps in the duration
-            const switchSteps = Math.floor(switchInterval / stepDuration * 4); // Steps before switching leading leg
+            let switchSteps = Math.floor(switchInterval / stepDuration * 4); // Steps before switching leading leg
+            switchSteps += (switchSteps % 4);
+            console.log("switchSteps: " + switchSteps)
 
             const leads = [
                 document.getElementById('lead1'),
