@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v4</title>
+    <title>Footstep Simulator v5</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,6 +68,7 @@
         <button type="button" onclick="startSimulation()">Start</button>
     </form>
 
+    <p id="warning">ABOUT TO SWITCH LEG!!!!!!</p>
     <div class="grid">
         <div id="lead1" class="rect lead">lead</div>
         <div id="lead2" class="rect">lead</div>        
@@ -79,10 +80,11 @@
 
     <script>
         let intervalId;
-
+        document.getElementById('warning').style.display = 'none'; // Initially hide the div
         function startSimulation() {
             clearInterval(intervalId);
 
+            
             const length = parseFloat(document.getElementById('length').value) * 60; // Convert minutes to seconds
             const bpm = parseFloat(document.getElementById('bpm').value);
             const switchInterval = parseFloat(document.getElementById('switch-interval').value) * 60; // Convert minutes to seconds
@@ -125,6 +127,14 @@
                     switchedSquares[activeSquare].classList.add('active');
                 }
 
+                if (currentStep % switchSteps === 1) {
+                    //warning about to switch leg
+                    const warning = document.getElementById('warning');
+                    warning.style.display = 'block'; // Show the div
+                    setTimeout(() => {
+                        warning.style.display = 'none'; // Hide the div after 1 second
+                    }, 1000); // 1000 ms = 1 second
+                }
                 if (currentStep % switchSteps === 0) {
                     leadingLeg = leadingLeg === 1 ? 2 : 1;
                     leads.forEach((lead, index) => {
