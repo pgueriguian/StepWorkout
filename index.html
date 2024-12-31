@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v14</title>
+    <title>Footstep Simulator v15</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -89,15 +89,20 @@
         function startSimulation() {
             clearInterval(intervalId);
             const countdown = document.getElementById('countdown');
-            for (let i = 5; i >= 1; i--) {
-                countdown.textContent = i;
-                // Block for 1 second
-                let start = Date.now();
-                while (Date.now() - start < 1000) {
-                  // This loop will block the thread for 1 second
-                }
-            }
+          // Use setTimeout to give the browser a chance to render the update before blocking
+          for (let i = 5; i >= 1; i--) {
+            countdown.textContent = i;
             
+            // Yield to allow the browser to render the updated text
+            setTimeout(function() {
+              // Block for 1 second
+              let start = Date.now();
+              while (Date.now() - start < 1000) {
+                // This loop will block the thread for 1 second
+              }
+            }, 0); // setTimeout with a delay of 0ms gives the browser a chance to render
+          }
+            countdown.textContent = 0;
             
             const length = parseFloat(document.getElementById('length').value) * 60; // Convert minutes to seconds
             const bpm = parseFloat(document.getElementById('bpm').value);
