@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v16</title>
+    <title>Footstep Simulator v17</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,7 +47,10 @@
         } 
         .warning {
             background-color: yellow;
-        }        
+        }
+        .info {
+            background-color: lightgreen;
+        }          
     </style>
 </head>
 <body>
@@ -71,8 +74,8 @@
         <button type="button" onclick="startSimulation()">Start</button>
     </form>
 
-    <p id="countdown" class="warning"></p>
-    <p id="warning" class="warning">ABOUT TO SWITCH LEG!!!!!!</p>
+    <h3 id="countdown" class="info"></h3>
+    <h1 id="warning" class="warning">ABOUT TO SWITCH LEG!!!!!!</h1>
     <div class="grid">
         <div id="lead1" class="rect lead">lead</div>
         <div id="lead2" class="rect">lead</div>        
