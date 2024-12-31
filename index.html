@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v11</title>
+    <title>Footstep Simulator v13</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -71,6 +71,7 @@
         <button type="button" onclick="startSimulation()">Start</button>
     </form>
 
+    <p id="countdown" class="warning"></p>
     <p id="warning" class="warning">ABOUT TO SWITCH LEG!!!!!!</p>
     <div class="grid">
         <div id="lead1" class="rect lead">lead</div>
@@ -87,7 +88,16 @@
 
         function startSimulation() {
             clearInterval(intervalId);
-
+            const countdown = document.getElementById('countdown');
+            for (let i = 5; i >= 1; i--) {
+                countdown.textContent = i;
+                // Block for 1 second
+                let start = Date.now();
+                while (Date.now() - start < 1000) {
+                  // This loop will block the thread for 1 second
+                }
+              }
+            }
             
             const length = parseFloat(document.getElementById('length').value) * 60; // Convert minutes to seconds
             const bpm = parseFloat(document.getElementById('bpm').value);
