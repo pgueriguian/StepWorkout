@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v9</title>
+    <title>Footstep Simulator v10</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -125,14 +125,6 @@
                     square.classList.remove('active');
                 });
                 
-                const activeSquare = currentStep % 4;
-                if (leadingLeg === 1){
-                    squares[activeSquare].classList.add('active');
-                }
-                else{
-                    switchedSquares[activeSquare].classList.add('active');
-                }
-
                 if (currentStep % switchSteps === switchSteps-1) {
                     //warning about to switch leg
                     const warning = document.getElementById('warning');
@@ -147,6 +139,14 @@
                         lead.classList.remove('lead');
                     });
                     leads[leadingLeg-1].classList.add('lead')
+                }
+
+                const activeSquare = currentStep % 4;
+                if (leadingLeg === 1){
+                    squares[activeSquare].classList.add('active');
+                }
+                else{
+                    switchedSquares[activeSquare].classList.add('active');
                 }
 
                 currentStep++;
