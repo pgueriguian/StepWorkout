@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v5</title>
+    <title>Footstep Simulator v6</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -44,6 +44,9 @@
         }
         .lead {
             background-color: red;
+        } 
+        .warning {
+            background-color: yellow;
         }        
     </style>
 </head>
@@ -68,7 +71,7 @@
         <button type="button" onclick="startSimulation()">Start</button>
     </form>
 
-    <p id="warning">ABOUT TO SWITCH LEG!!!!!!</p>
+    <p id="warning" class="warning">ABOUT TO SWITCH LEG!!!!!!</p>
     <div class="grid">
         <div id="lead1" class="rect lead">lead</div>
         <div id="lead2" class="rect">lead</div>        
@@ -133,9 +136,9 @@
                     warning.style.display = 'block'; // Show the div
                     setTimeout(() => {
                         warning.style.display = 'none'; // Hide the div after 1 second
-                    }, 1000); // 1000 ms = 1 second
+                    }, 2000); // 2000 ms = 1 second
                 }
-                if (currentStep % switchSteps === 0) {
+                if (currentStep % switchSteps === 0 && currentStep !== 0) {
                     leadingLeg = leadingLeg === 1 ? 2 : 1;
                     leads.forEach((lead, index) => {
                         lead.classList.remove('lead');
