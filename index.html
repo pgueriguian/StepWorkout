@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipclock@0.7.6/dist/flipclock.min.css">
     <title>Footstep Simulator v23</title>
     <style>
         body {
@@ -85,10 +84,7 @@
         <div id="square3" class="square">3</div>
         <div id="square4" class="square">4</div>
     </div>
-    <div id="clock"></div>
     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flipclock/dist/flipclock.min.js"></script>
     <script>
         let intervalId;
         document.getElementById('warning').style.visibility = 'hidden'; // Initially hide the div
@@ -102,7 +98,19 @@
                 // Wait for 1 second (non-blocking)
                 await new Promise(resolve => setTimeout(resolve, 1000));
               }
-            countdown.textContent = 0;
+            countdown.textContent = 'GO';
+
+            let remainTime = length;
+            const timerInterval = setInterval(() => {
+                remainTime--; // Decrease the remaining time by 1
+                countdown.textContent = remainTime; // Update the element with the remaining time
+                
+            
+                if (remainTime < 0) {
+                    clearInterval(timerInterval); // Stop the interval when the time is up
+                    countdownElement.textContent = 'Time is up!';
+                }
+            }, 1000); // Run every second (1000 milliseconds)
             
             const length = parseFloat(document.getElementById('length').value) * 60; // Convert minutes to seconds
             const bpm = parseFloat(document.getElementById('bpm').value);
@@ -134,12 +142,7 @@
             
             let currentStep = 0;
             let leadingLeg = 1; // 1 for left, 2 for right
-
-            var clock = $('#clock').FlipClock(length, {
-              clockFace: 'HourlyCounter',
-              countdown: true
-            });            
-
+            
             function updateSquares() {
                 squares.forEach((square, index) => {
                     square.classList.remove('active');
