@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v25</title>
+    <title>Footstep Simulator v26</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -104,10 +104,12 @@
     
     <script>
         let intervalId;
+	let timerInterval;
         document.getElementById('warning').style.visibility = 'hidden'; // Initially hide the div
 
         async function startSimulation() {
             clearInterval(intervalId);
+	    clearInterval(timerInterval);
             const countdown = document.getElementById('countdown');
               for (let i = 5; i >= 1; i--) {
                 countdown.textContent = i;
@@ -128,14 +130,14 @@
             console.log("switchSteps: " + switchSteps)
 
             let remainTime = length;
-            const timerInterval = setInterval(() => {
+            timerInterval = setInterval(() => {
                 remainTime--; // Decrease the remaining time by 1
                 countdown.textContent = remainTime; // Update the element with the remaining time
                 
             
                 if (remainTime < 0) {
                     clearInterval(timerInterval); // Stop the interval when the time is up
-                    countdownElement.textContent = 'Time is up!';
+                    countdown.textContent = 'Time is up!';
                 }
             }, 1000); // Run every second (1000 milliseconds)
             
