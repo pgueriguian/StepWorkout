@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v20</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flipclock@0.7.6/dist/flipclock.min.css">
+    <title>Footstep Simulator v21</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -84,7 +85,9 @@
         <div id="square3" class="square">3</div>
         <div id="square4" class="square">4</div>
     </div>
+    <div id="clock"></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/flipclock@0.7.6/dist/flipclock.min.js"></script>
     <script>
         let intervalId;
         document.getElementById('warning').style.visibility = 'hidden'; // Initially hide the div
@@ -130,6 +133,11 @@
             
             let currentStep = 0;
             let leadingLeg = 1; // 1 for left, 2 for right
+
+            var clock = $('#clock').FlipClock(length, {
+              clockFace: 'HourlyCounter',
+              countdown: true
+            });            
 
             function updateSquares() {
                 squares.forEach((square, index) => {
