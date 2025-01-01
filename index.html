@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v18</title>
+    <title>Footstep Simulator v19</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -136,13 +136,14 @@
                     square.classList.remove('active');
                 });
                 
-                if (currentStep % switchSteps === switchSteps-1) {
+                if (currentStep % switchSteps === switchSteps-4) {
                     //warning about to switch leg
                     const warning = document.getElementById('warning');
                     warning.style.visibility = 'visible'; // Make the div visible
                     setTimeout(() => {
                         warning.style.visibility = 'hidden'; // Hide the div after 2 second
                     }, 2000); // 2000 ms = 2 second
+                    console.log('warn')
                 }
                 if (currentStep % switchSteps === 0 && currentStep !== 0) {
                     leadingLeg = leadingLeg === 1 ? 2 : 1;
@@ -150,14 +151,17 @@
                         lead.classList.remove('lead');
                     });
                     leads[leadingLeg-1].classList.add('lead')
+                    console.log('switch')
                 }
 
                 const activeSquare = currentStep % 4;
                 if (leadingLeg === 1){
                     squares[activeSquare].classList.add('active');
+                    console.log(activeSquare)
                 }
                 else{
                     switchedSquares[activeSquare].classList.add('active');
+                    console.log('r'+activeSquare)
                 }
 
                 currentStep++;
