@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v23</title>
+    <title>Footstep Simulator v24</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -99,6 +99,16 @@
                 await new Promise(resolve => setTimeout(resolve, 1000));
               }
             countdown.textContent = 'GO';
+            
+            const length = parseFloat(document.getElementById('length').value) * 60; // Convert minutes to seconds
+            const bpm = parseFloat(document.getElementById('bpm').value);
+            const switchInterval = parseFloat(document.getElementById('switch-interval').value) * 60; // Convert minutes to seconds
+
+            const stepDuration = (60 / bpm) * 4; // Time for a full cycle (4 steps)
+            const totalSteps = Math.floor(length / stepDuration * 4); // Total steps in the duration
+            let switchSteps = Math.floor(switchInterval / stepDuration * 4); // Steps before switching leading leg
+            switchSteps += (4 - (switchSteps % 4)) % 4;
+            console.log("switchSteps: " + switchSteps)
 
             let remainTime = length;
             const timerInterval = setInterval(() => {
@@ -112,16 +122,6 @@
                 }
             }, 1000); // Run every second (1000 milliseconds)
             
-            const length = parseFloat(document.getElementById('length').value) * 60; // Convert minutes to seconds
-            const bpm = parseFloat(document.getElementById('bpm').value);
-            const switchInterval = parseFloat(document.getElementById('switch-interval').value) * 60; // Convert minutes to seconds
-
-            const stepDuration = (60 / bpm) * 4; // Time for a full cycle (4 steps)
-            const totalSteps = Math.floor(length / stepDuration * 4); // Total steps in the duration
-            let switchSteps = Math.floor(switchInterval / stepDuration * 4); // Steps before switching leading leg
-            switchSteps += (4 - (switchSteps % 4)) % 4;
-            console.log("switchSteps: " + switchSteps)
-
             const leads = [
                 document.getElementById('lead1'),
                 document.getElementById('lead2')
