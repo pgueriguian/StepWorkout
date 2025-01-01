@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v26</title>
+    <title>Footstep Simulator v27</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -132,8 +132,9 @@
             let remainTime = length;
             timerInterval = setInterval(() => {
                 remainTime--; // Decrease the remaining time by 1
-                countdown.textContent = remainTime; // Update the element with the remaining time
-                
+                //countdown.textContent = remainTime; // Update the element with the remaining time
+                countdown.textContent = `${Math.floor(remainTime / 60)}:${(remainTime % 60).toString().padStart(2, '0')}`;
+
             
                 if (remainTime < 0) {
                     clearInterval(timerInterval); // Stop the interval when the time is up
