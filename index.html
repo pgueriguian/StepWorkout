@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footstep Simulator v27</title>
+    <title>Footstep Simulator v28</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,25 +12,26 @@
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(2, 120px);
+            grid-template-columns: repeat(2, 360px);
             gap: 10px;
             justify-content: center;
         }
         .square {
-            width: 120px;
-            height: 120px;
-            background-color: lightgray;
+            width: 360px;
+            height: 240px;
+            background-color: rgb(101, 253, 0);
             border: 1px solid #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 18px;
             font-weight: bold;
-			margin: 10px;
+			margin-top: 10px;
+            margin-bottom: 10px;
         }
         .rect {
-            width: 120px;
-            height: 50px;
+            width: 360px;
+            height: 60px;
             background-color: lightgray;
             border: 1px solid #ccc;
             display: flex;
@@ -38,10 +39,11 @@
             justify-content: center;
             font-size: 18px;
             font-weight: bold;
-			margin: 10px;
+			margin-top: 10px;
+            margin-bottom: 10px;
         }        
         .active {
-            background-color: DeepSkyBlue;
+            background-color: rgb(80, 91, 243);
         }
         .lead {
             background-color: red;
@@ -57,15 +59,15 @@
 		justify-content: center;
         border: 2px solid black; /* Black border around the container */
         background-color: rgba(169, 169, 169, 0.9); /* Optional: dark gray background */
-        gap: 10px; /* Space between square1 and square2 */
+        gap: 0px; /* Space between square1 and square2 */
 		width:50%;
 		margin: 0 auto;  
     }        
     </style>
 </head>
 <body>
-    <h1>Footstep Simulator</h1>
-    <form id="control-form">
+    <h6>Footstep Simulator</h6>
+    <form id="control-form" style="font-size: xx-small;line-height: .2;">
         <label>
             Length (minutes):
             <input type="number" id="length" step="0.1" min="0.1" value="12" required>
@@ -84,7 +86,7 @@
         <button type="button" onclick="startSimulation()">Start</button>
     </form>
 
-    <h3 id="countdown" class="info"></h3>
+    <h3 id="countdown" class="info">Waiting to start</h3>
     <h1 id="warning" class="warning">ABOUT TO SWITCH LEG!!!!!!</h1>
     <div class="grid">
         <div id="lead1" class="rect lead">lead</div>
